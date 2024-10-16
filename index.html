@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Roll Animation</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f9;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .dice {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: rotateX(0deg) rotateY(0deg);
+            transition: transform 1s ease-in-out;
+        }
+
+        .side {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            border: 2px solid #000;
+            font-size: 2rem;
+            text-align: center;
+            line-height: 100px;
+        }
+
+        .one { transform: rotateY(0deg) translateZ(50px); }
+        .two { transform: rotateY(90deg) translateZ(50px); }
+        .three { transform: rotateY(180deg) translateZ(50px); }
+        .four { transform: rotateY(-90deg) translateZ(50px); }
+        .five { transform: rotateX(90deg) translateZ(50px); }
+        .six { transform: rotateX(-90deg) translateZ(50px); }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="dice" class="dice">
+            <div class="side one">1</div>
+            <div class="side two">2</div>
+            <div class="side three">3</div>
+            <div class="side four">4</div>
+            <div class="side five">5</div>
+            <div class="side six">6</div>
+        </div>
+        <button id="rollButton">Roll Dice</button>
+    </div>
+
+    <script>
+        const dice = document.getElementById('dice');
+        const rollButton = document.getElementById('rollButton');
+
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function rollDice() {
+            const xRand = getRandomInt(0, 360);
+            const yRand = getRandomInt(0, 360);
+
+            dice.style.transform = `rotateX(${xRand}deg) rotateY(${yRand}deg)`;
+        }
+
+        rollButton.addEventListener('click', rollDice);
+    </script>
+</body>
+</html>
